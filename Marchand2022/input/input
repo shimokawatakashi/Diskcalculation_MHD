@@ -1,0 +1,31 @@
+# input file for bin/eta_table (eta_O, eta_H, eta_A table on a log ng x T x B grid)
+
+ng_min = 1.0e3            // minimum n_g (gas particles, n_H = n_g/0.585) [cm^-3]
+ng_max = 1.0e22           // maximum n_g [cm^-3]
+ng_num = 191              // number of log-spaced n_g points
+
+T_min = 1.0e1             // minimum temperature [K]
+T_max = 1.0e6             // maximum temperature [K]
+T_num = 51                // number of log-spaced T points (0.1 dex)
+
+B_min = 1.0e-6            // minimum magnetic field [G]
+B_max = 1.0e3             // maximum magnetic field [G]
+B_num = 91                // number of log-spaced B points (0.1 dex)
+
+zeta    = 1.0e-17         // ionization rate [s^-1]
+species = K               // thermally ionized species: one of K, Na, H
+
+dust_model  = single      // mrn or single
+dust_to_gas = 1.0e-2      // dust-to-gas mass ratio
+rho_grain   = 1.4         // grain material density [g/cm^3]
+mu_gas      = 2.34        // gas mass per n_g in units of m_p (Okuzumi 2009)
+
+a_min = 5.0e-7            // mrn: minimum grain size [cm]
+a_max = 2.5e-5            // mrn: maximum grain size [cm]
+n_bin = 51                // mrn: number of size bins (質量差の桁数×10)
+slope = -3.5              // mrn: dn/da ~ a^slope
+
+a_single = 1.0e-5         // single: grain size [cm]
+
+output = ./table/eta01mu_table.d   // output file (relative to Marchand2022/)
+format = fortran          // plain (header + n_g T B eta_O eta_H eta_A) or fortran (3I4,6E13.5)

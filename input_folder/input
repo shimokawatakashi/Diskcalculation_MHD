@@ -1,0 +1,59 @@
+# input file
+
+outdir                 = /mnt/hdd/shimokawa/test  // 出力先 (磁場は outdir に _B を付けたディレクトリ)
+
+diskin                 = 5.0e-1                   // 計算領域の内側半径 [au]
+diskout                = 1000.0                   // 計算領域の外側半径 [au]
+cut_off                = 100.0                    // 初期面密度のカットオフ半径 [au]
+z_max                  = 5.0                      // 鉛直格子の上端 [H_g]
+
+nrdisk                 = 100                      // 動径の格子数
+nzdisk                 = 101                      // 鉛直の格子数
+sigmag0_               = 10.0                     // ガスの初期面密度の規格化 [g/cm^2]
+
+amin                   = 1.0e-5                   // ダストの最小半径 [cm]
+amax                   = 1.0e4                    // ダストの最大半径 [cm]
+ndust                  = 300                      // ダストの質量ビン数
+nd_lin                 = 10                       // そのうち線形間隔のビン数
+rhodi                  = 1.4                      // ダストの内部密度 [g/cm^3]
+fdg                    = 1.0e-2                   // ダストとガスの質量比 (0 ならダストを計算しない)
+beta_ini               = 1.0e4                    // 初期の中心面プラズマβ
+eta_max                = 1.0e20                   // η = η_O + η_A の上限 [cm^2/s]
+B_out                  = 1.0e-5                   // 磁場の下限 (外側境界の値) [G]
+Cw                     = 0.0                      // 風による質量損失のパラメータ (Riols et al. 2019 の C_w)
+alpha_DW               = 1.0e-2                   // α_DW の初期値 (wind_alpha_model = 0 では基準値)
+
+alpha_t                = 1.0e-4                   // α_MRI の初期値
+star_mass              = 1.0                      // 中心星質量 [M_sun]
+
+cfl                    = 3.0e-1                   // CFL 数
+
+tend                   = 1.0e4                    // 終了時刻 [yr]
+
+wind_alpha_model       = 1                        // α_DW のモデル. 1 : Enomoto et al. (2026) 自己無撞着 , 0 : Suzuki et al. (2016)
+lambda_w               = 2.0                      // 円盤風の磁気レバーアーム λ (Tabone et al. 2022). 質量損失率に 1/(λ-1) が掛かる. λ > 1 , 既定 2.0
+use_implicit_mag       = true                     // true : 磁場の拡散を θ 法の陰解法 (三重対角) で解く , false : 陽解法
+use_implicit_coag      = true                     // true : 合体・破砕を半陰解法で解く , false : 陽解法
+use_full_implicit_coag = true                     // true : 合体・破砕を完全陰解法 (Jacobian + 線形ソルブ) で解く. use_implicit_coag より優先
+use_eta_floor          = false                    // true (既定) : Elsasser 数 Λ = V_A^2/(η Ω) >= 1e-5 となるよう η に下限を付ける , false : 付けない
+radial_grid_type       = log                      // 動径格子. log (既定) / linear / root (sqrt(r) で等間隔) / log_floor
+radial_grid_floor_dr   = -1.0                     // log_floor のみ : 内側のセル幅の下限 [au]. <= 0 なら rin/(NG+1)
+growth                 = true                     // true : ダストの合体成長を計算する
+fragmentation          = true                     // true : 破砕を計算する
+thermal                = true                     // true : 温度を輻射平衡で計算する
+rad_diff_fac           = 0                        // 温度方程式の動径輻射拡散の強さ (0 = off, 1 = 物理値 (Rosseland, flux-limited). 既定 1)
+zeta_CR0               = 1.0e-17                  // r = 1 au, z = 0 での宇宙線電離率 [s^-1] (既定 1e-17)
+dust_init_mode         = monomer                  // 初期ダスト分布. monomer (既定, 最小ビンに全質量) / powerlaw
+dust_init_powerlaw_q   = 3.5                      // powerlaw のみ : n(a) da ∝ a^-q
+dust_init_amax_mode    = stokes                   // powerlaw のみ : 最大半径の決め方. fixed / stokes / frag_drift
+dust_init_St_target    = 0.1                      // amax_mode = stokes のみ : St(a_max) がこの値になるよう a_max(r) を決める
+dust_init_f_frag       = 0.87                     // amax_mode = frag_drift のみ : St_frag = f_f v_frag^2/(3 α c_s^2)
+dust_init_f_drift      = 0.55                     // amax_mode = frag_drift のみ : St_drift = f_d ε (v_K/c_s)^2 |dlnP/dlnr|^-1
+
+frag_slope             = -1.83                    // 破片の質量分布の冪 (n(m) dm ∝ m^z の z)
+frag_frac              = 1.0e-1                   // 破砕のときの質量の分配の割合
+v_col_crit             = 10.0                     // 氷ダストの破砕速度 [m/s]
+v_col_sili             = 1.0                      // シリケイトダストの破砕速度 [m/s]
+T_snow                 = 160.0                    // スノーラインの温度 [K] (氷/シリケイトの破砕速度の切り替えの中心, 幅は 0.1*T_snow. 既定 160)
+face_flux_scheme       = true                     // true : 面フラックス法 (face_scheme.cpp) , false (既定) : セル中心の速度 + Roe 平均
+mag_theta              = 1.0                      // 磁場の陰的拡散の θ (1 = 後退 Euler, 0.5 = Crank-Nicolson, 既定 0.55)

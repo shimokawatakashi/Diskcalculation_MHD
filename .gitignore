@@ -1,0 +1,22 @@
+# build products
+obj/
+bin/run
+src/a.out
+Marchand2022/obj/
+*.o
+*.mod
+
+# external code / large data
+optool/
+Marchand2022/table/
+Marchand2022/thesis/*.pdf
+
+# figures made by the notebooks
+plot/fig/
+plot/phd_fig/
+
+# misc
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store
+.claude/
