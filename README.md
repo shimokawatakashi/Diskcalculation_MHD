@@ -165,7 +165,7 @@ make daytime    ARGS=input_folder/input   # scripts/run_daytime.sh    : 毎日 W
 - `EstimateDtCoagulation`, `EstimateDtGain` : 陽解法・半陰解法の時間刻みの制限
 
 ### `src/face_scheme.cpp` (`DustDisk` クラス, `face_flux_scheme = true` のとき)
-セル境界の速度を使い, MUSCL + SSP-RK2 で移流を解く。
+セル境界の速度を使い, MUSCL で移流を解く。
 `SetupFaceScheme`, `CalcGasFaceVelocity`, `AdvanceGasFaceScheme`, `CalcDustFaceVelocity`, `CalcDustFluxFace`, `CalcVaporFluxFace`, `AdvanceDustAdvectionFace`, `AdvanceVaporFace`, `GasAdvectionDtFace`, `DustAdvectionDtFace`。
 
 ### `src/alpha.cpp` (`CalcAlphaParameter` クラス, 電離平衡と磁気拡散係数)
