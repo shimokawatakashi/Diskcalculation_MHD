@@ -132,7 +132,7 @@ make daytime    ARGS=input_folder/input   # scripts/run_daytime.sh    : 毎日 W
 - `SetDiskGasModel` : 初期のガス円盤 (面密度, 温度, 磁場)
 - `SetInitialDustDistribution`, `CalcSizeForTargetStokes`, `CalcInitialStokesLimit` : 初期ダスト分布 (monomer / 冪分布)
 - `CalcXrayIonizationrate`, `CalcCosmicRayIonizationrate` : X 線・宇宙線による電離率
-- `Iteration` : 計算開始前に温度・磁気拡散・乱流を反復して自己無撞着にする
+- `Iteration` : 温度・磁気拡散・乱流を反復して初期分布を計算
 
 **物理量の更新**
 - `UpdatePhysicalParameter` : 音速, スケールハイト, 密度, 圧力など
@@ -178,9 +178,8 @@ make daytime    ARGS=input_folder/input   # scripts/run_daytime.sh    : 毎日 W
 ### `src/magnetic_field1D.cpp` (`Magnetic_Field2D` クラス, 鉛直磁場の輸送)
 - `SetRadiusGridParameter`, `SetVerticalGridParameter`, `Set_Differential_Coefficient`, `SetDiskParameter`, `SetMagneticFieldParameter` : 格子と円盤・磁場の量を設定
 - `CalculateDeltaTime` : 磁場の陽解法の時間刻み
-- `Calc_Mag`, `Calc_Mag_Implicit` : 誘導方程式の時間発展 (移流 `Calculate_Advection_B` + 拡散 `Calculate_Diffuse_B`, 陰解法は θ 法の三重対角ソルブ)
-- `CalculationMRIturbulence`, `CalculationMRIturbulence2` : β, エルサッサー数から α_MRI を求める (`Newton_Am`, `Func_Am`, `PrimeFunc_Am` を使う)
-- `Apply_Gaussianfilter_MRI` : α_MRI のガウシアンフィルター
+- `Calc_Mag`, `Calc_Mag_Implicit` : 誘導方程式の時間発展 (移流 `Calculate_Advection_B` + 拡散 `Calculate_Diffuse_B`, 陰解法は θ 法の三重対角)
+- `CalculationMRIturbulence : β, エルサッサー数から α_MRI を求める 
 
 ### `src/energy.cpp` (`Energy_Calc` クラス, 温度)
 - `SetGridParameter`, `SetDiskParameter`, `SetMagneticField` : 格子と円盤・磁場の量を設定
