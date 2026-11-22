@@ -194,7 +194,7 @@ make daytime    ARGS=input_folder/input   # scripts/run_daytime.sh    : 毎日 W
 ### その他
 - `src/physical_constants.hpp`, `src/typedef.hpp` : 物理定数と型の定義
 - `Marchand2022/` : 磁気拡散係数の計算 (Marchand et al. 2022 の方法)。`calc_resistivity.cpp` と `calculation_tool.cpp` を本体と一緒にコンパイルする
-- `optool/` : ダストの吸収係数の計算 (プロット用)
+- `optool/` : ダストの吸収係数の計算 (プロット用) URL : https://github.com/cdominik/optool
 - `scripts/` : 長時間計算の自動再開スクリプト
 
 ## 参考文献 (コード中で引用しているもの)
